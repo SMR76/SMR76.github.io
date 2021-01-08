@@ -51,6 +51,15 @@
 .bi-cup-fill:hover::before              {color:#a55d00;}
 .bi-bookmark-heart-fill:hover::before   {color:#ff004c;}
 
+[class*=" bi-"]::before {
+    transition: color 0.5s linear;
+}
+
+#hammer::before {
+    animation: hammerRAnimation 3s alternate infinite;
+    transform-origin: 10px 10px;
+}
+
 @keyframes ttBackAnimation {
     0% {
         opacity:0;
@@ -60,6 +69,20 @@
     }
 }
 
-[class*=" bi-"]::before {
-    transition: color 0.5s linear;
+@keyframes hammerRAnimation {
+    0% {
+        transform: rotate(0deg);
+    }
+    5% {
+        transform: rotate(-50deg);
+    }
+    10% {
+        transform: rotate(0deg);
+    }
+    15% {
+        transform: rotate(-50deg);
+    }
+    20% {
+        transform: rotate(0deg);
+    }
 }
