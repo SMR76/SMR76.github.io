@@ -1,19 +1,18 @@
 $(document).ready(() => {
-    initializeSkills();
-    initializeRepositories();
-    initializeSidebarLinks();
+
+    $.getJSON("./info.json",(data)=>{
+        initializeSkills(       data["skillList"]   );
+        initializeRepositories( data["repoList"]    );
+        initializeSidebarLinks( data["soucialList"] );
+    }).fail(() => {
+        alert("fail to initialize json data, please refresh browser tab.")
+    });
+    
     initEvents();
 });
 
-function initializeSkills() {    
-    var skillList = [
-        {skill:'Painting'        ,master: 11},
-        {skill:'Illustrator',master: 10},
-        {skill:'C++'        ,master: 6},
-        {skill:'Qt/Qml'     ,master: 5},
-        {skill:'C'          ,master: 4}
-    ];
-
+function initializeSkills(skillList) {  
+    
     var skillsContainer = $("#skills");
 
     for(var i in skillList) {
@@ -30,25 +29,7 @@ function initializeSkills() {
     }
 }
 
-function initializeRepositories() {    
-    var repoList = [
-        {
-            name:'Car Alarm',
-            link:'https://github.com/SMR76/Car_Alarm',
-            ver: '0.2',
-            describe:'this project based on designing hardware that installs in your car and helps to protect the vehicle against thieves and have better control over it.'
-        },{
-            name:'Class Scheduler',
-            link:'https://github.com/SMR76/class-scheduler',
-            ver: '0.3',
-            describe:'a simple program with generic algorithm to show availability and conflicts for classes in a semester.'
-        },{
-            name:'Subtitle Fixer',
-            link:'https://github.com/SMR76/persian-subtitle-fixer',
-            ver: '1.0',
-            describe:'a user-friendly program that converts Window-1256 charset to UTF-8.'
-        }
-    ];
+function initializeRepositories(repoList) {  
 
     var rposContainer = $("#repositories");
 
@@ -63,51 +44,7 @@ function initializeRepositories() {
     }
 }
 
-function initializeSidebarLinks() {    
-    var soucialList = [
-        {
-            id:'github',   icoClass: 'bi bi-github',               
-            attr:'target="_blank" href="https://github.com/SMR76"' ,
-            text:'Follow my GitHub page',
-            obj: []
-        },{
-            id:'instagram',icoClass: 'bi bi-instagram',            
-            attr:'target="_blank" href="https://www.instagram.com/s_m_r67/"' ,
-            text:'Follow my Instagram page',
-            obj: []
-        },{
-            id:'twitter',icoClass: 'bi bi-twitter',            
-            attr:'target="_blank" href="https://twitter.com/S_M_R_67"' ,
-            text:'Follow my Twitter page',
-            obj: []
-        },{
-            id:'linkedin', icoClass: 'bi bi-linkedin',             
-            attr:'target="_blank" href="https://www.linkedin.com/in/seyyed-morteza-razavi-403b2a196" ' ,
-            text:'Follow my Linkedin',
-            obj: []
-        },{
-            id:'email',    icoClass: 'bi bi-envelope',             
-            attr:'href="mailto:seyyedmortezarazavi76@gmail.com"' ,
-            text:'Contact me',
-            obj: []
-        },{
-            id:'telegram', icoClass: 'bi bi-telegram fixBi',       
-            attr:'target="_blank" href="https://t.me/S_M_R0"' ,
-            text:'Contact me at Telegram',
-            obj: []
-        },{
-            id:'donate',   icoClass: 'bi bi-cup-fill',             
-            attr:'href=""  ' ,
-            text:'Buy me a coffee',
-            obj: []
-        },{
-            id:'book',     icoClass: 'bi bi-bookmark-heart-fill',  
-            attr:'href=""' ,
-            text:'Bookmark my page',
-            obj: []
-        }
-    ];
-
+function initializeSidebarLinks(soucialList) {    
     var idPostFix = "SB";
 
     var sidebarContainer = $("#sidebar");
