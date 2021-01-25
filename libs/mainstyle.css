@@ -1,0 +1,78 @@
+@font-face {
+    font-family: fa-brands-400;
+    src: url("../resources/fonts/fa-brands-400.ttf");
+}
+
+.smrTooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.smrTooltip .smrTooltipText {
+    visibility: hidden;
+    /*width: 200px;*/
+    white-space: nowrap;
+    position: absolute;
+    opacity:0;
+    right: 100%;
+    background-color:#ffffffc5;
+    padding-left: 5px;
+}
+
+.smrTooltip:hover .smrTooltipText {
+    visibility: visible;
+    animation: ttBackAnimation 1s forwards;
+}
+
+.bi-telegram::before { 
+    font-family: fa-brands-400 !important;
+    content: "\f3fe";
+}
+
+.no-text-deco, .no-text-deco:hover {
+    text-decoration: none;
+}
+
+.bi-instagram:hover::before             {color:#ff6600;}
+.bi-twitter:hover::before               {color:#00a2ff;}
+.bi-linkedin:hover::before              {color:#0051ff;}
+.bi-envelope:hover::before              {color:#ff0000;}
+.bi-telegram:hover::before              {color:#00b7ff;}
+.bi-cup-fill:hover::before              {color:#a55d00;}
+.bi-bookmark-heart-fill:hover::before   {color:#ff004c;}
+
+[class*=" bi-"]::before {
+    transition: color 0.5s linear;
+}
+
+#hammer::before {
+    animation: hammerRAnimation 3s alternate infinite;
+    transform-origin: 10px 10px;
+}
+
+@keyframes ttBackAnimation {
+    0% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+
+@keyframes hammerRAnimation {
+    0% {
+        transform: rotate(0deg);
+    }
+    5% {
+        transform: rotate(-50deg);
+    }
+    10% {
+        transform: rotate(0deg);
+    }
+    15% {
+        transform: rotate(-50deg);
+    }
+    20% {
+        transform: rotate(0deg);
+    }
+}
