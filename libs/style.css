@@ -1,37 +1,34 @@
-@font-face {
+  @font-face {
     font-family: fa-brands-400;
     src: url("../resources/fonts/fa-brands-400.ttf");
+    font-display: fallback;
 }
 
-.smrTooltip {
+#myRepositories .row:nth-child(even){
+    background-color: #ebebeb;
+}
+
+#myRepositories     {padding:50px 0 100px 0;overflow:auto;color: #000000; background-color: #fff;}
+#contactMe          {padding:50px 0 100px 0;overflow:auto;color: #fff; background-color: #424242;}
+
+#contactMe div      {
     position: relative;
-    display: inline-block;
+    
+    width: 50vw;height: 50vw;
+    max-width:  550px;
+    max-height: 550px;
 }
-
-.smrTooltip .smrTooltipText {
-    visibility: hidden;
-    /*width: 200px;*/
-    white-space: nowrap;
+#contactMe div img  {
     position: absolute;
-    opacity:0;
-    right: 100%;
-    background-color:#ffffffc5;
-    padding-left: 5px;
+    filter: grayscale(100%);
+    transition: all 0.5s ease;
 }
+#contactMe img:hover {
+    filter: grayscale(0%);
+}
+.no-text-deco, .no-text-deco:hover {text-decoration: none;}
 
-.smrTooltip:hover .smrTooltipText {
-    visibility: visible;
-    animation: ttBackAnimation 1s forwards;
-}
-
-.bi-telegram::before { 
-    font-family: fa-brands-400 !important;
-    content: "\f3fe";
-}
-
-.no-text-deco, .no-text-deco:hover {
-    text-decoration: none;
-}
+.bi-telegram::before {font-family: fa-brands-400 !important;content: "\f3fe";}
 
 .bi-instagram:hover::before             {color:#ff6600;}
 .bi-twitter:hover::before               {color:#00a2ff;}
@@ -41,38 +38,4 @@
 .bi-cup-fill:hover::before              {color:#a55d00;}
 .bi-bookmark-heart-fill:hover::before   {color:#ff004c;}
 
-[class*=" bi-"]::before {
-    transition: color 0.5s linear;
-}
-
-#hammer::before {
-    animation: hammerRAnimation 3s alternate infinite;
-    transform-origin: 10px 10px;
-}
-
-@keyframes ttBackAnimation {
-    0% {
-        opacity:0;
-    }
-    100% {
-        opacity:1;
-    }
-}
-
-@keyframes hammerRAnimation {
-    0% {
-        transform: rotate(0deg);
-    }
-    5% {
-        transform: rotate(-50deg);
-    }
-    10% {
-        transform: rotate(0deg);
-    }
-    15% {
-        transform: rotate(-50deg);
-    }
-    20% {
-        transform: rotate(0deg);
-    }
-}
+[class*=" bi-"]::before {transition: color 0.5s linear;}
