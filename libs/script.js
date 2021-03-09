@@ -1,12 +1,5 @@
 $(document).ready(() => {
-    var url = "https://api.github.com/users/smr76/repos";
-
-    $.getJSON("libs/info.json", (data) => {
-        initializeSkills(data["skillList"]);
-        initializeSidebarLinks(data["soucialList"]);
-    }).fail(() => {
-        alert("fail to initialize json data, please refresh browser tab.")
-    });
+    let url = "https://api.github.com/users/smr76/repos";
 
     $.get(url).then((data) => {
         initializeRepositories(data);
@@ -15,63 +8,32 @@ $(document).ready(() => {
     initEvents();
 });
 
-function initializeSkills(skillList) {
-    var skillsContainer = $("#skills");
-
-    for (const skill of skillList) {
-        var skillFormat =
-            `<div class="row">
-            <div class="col-3 h-100 mt-1 small text-right text-muted">${skill.skill}</div>
-            <div class="col-9 mt-1"><div class="progress">
-            <div class="progress-bar bg-dark" role="progressbar"
-                style="width: ${skill.master}%" aria-valuenow="${skill.master}" 
-                aria-valuemin="0" aria-valuemax="100">${skill.master >= 10 ? skill.master + '%' : ''}
-            </div></div></div></div>`;
-
-        skillsContainer.append(skillFormat);
-    }
-}
-
 async function initializeRepositories(repoList) {
-    var rposContainer = $("#repositories");
-
-    var cToggle = false;
-
     for (const repoInfo of repoList) {
-        var tag = "";
-        cToggle = !cToggle;
-
-        await $.get(repoInfo.tags_url).then((data)=>{            
-                if(data.length > 0)
-                    tag = data[data.length-1].name;
-            });
-        
-        var repoFormat =
-            `<div class="row pt-1 pb-1 ${cToggle ? 'bg-light' : ''}"><div class="col-6 small text-left">
-            <a class="alert no-text-deco text-dark text-capitalize" href="${repoInfo.html_url}" target="_blank">
-            ${repoInfo.name}
-            ${repoInfo.fork == true? '<sub class="text-primary">forked</sub>' : ''}</a>
-            <span  class="badge badge-dark">${tag}</span>
-            </div><div class="col-6 small text-muted text-left text-capitalize">
-            ${repoInfo.description != null? repoInfo.description : "no description."}
-            </div></div></div>`;
-        
-        rposContainer.append(repoFormat);
+        repoAppender(repoInfo);
     }
 }
 
-function initializeSidebarLinks(soucialList) {    
-    var idPostFix = "SB";
-    var sidebarContainer = $("#sidebar");
+async function repoAppender(repoInfo) {
+    let rposContainer = $("#repositories");
+    let tag = "";
 
-    for(const soucial of soucialList) {
-        var soucialIconFormat =  
-            `<div class="row justify-content-end "><div class="col-8 text-right p-0">
-            <a id="${soucial.id + idPostFix}" class=" text-dark ${soucial.icoClass} smrTooltip " ${soucial.attr} rel="sidebar">
-            <span class="smrTooltipText small mt-1 pr-2">${soucial.text}</span></a>
-            </div></div>`;
-        sidebarContainer.append(soucialIconFormat);
-    }
+    await $.get(repoInfo.tags_url).then((data)=>{            
+            if(data.length > 0)
+                tag = data[data.length-1].name;
+        });
+    
+    var repoFormat =
+        `<div class="row pt-1 pb-1 rounded"><div class="col-12 col-md-6 small text-left">
+        <a class="alert no-text-deco text-dark text-capitalize" href="${repoInfo.html_url}" target="_blank">
+        ${repoInfo.name}
+        ${repoInfo.fork == true? '<sub class="text-primary">forked</sub>' : ''}</a>
+        <span  class="badge badge-dark">${tag}</span>
+        </div><div class="col-12 pt-2 pt-md-0 col-md-6 small text-muted text-left">
+        ${repoInfo.description != null? repoInfo.description : "no description."}
+        </div></div></div>`;
+    
+    rposContainer.append(repoFormat);   
 }
 
 function initEvents() {
@@ -91,6 +53,25 @@ function initEvents() {
             elem.setAttribute('rel', 'sidebar');
             elem.click(); //this.title=document.title;
             return true;
+        }
+    });
+
+    // navbar scroll spy
+    $("#navbarNavBrand,#navbarNav a").on('click', function (event) {
+        if (this.hash !== "") {
+            event.preventDefault();
+            var hash = this.hash;
+
+            $('html, body').animate({
+                scrollTop: $(hash).offset().top - 80
+            }, 800, function () {
+                if (history.pushState) {
+                    history.pushState(null, null, hash);
+                }
+                else {
+                    location.hash = hash;
+                }
+            });
         }
     });
 }
