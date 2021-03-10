@@ -74,4 +74,9 @@ function initEvents() {
             });
         }
     });
+
+    setTimeout(() => {
+        let message = $("#welcomeMessage");
+        message.slideUp();
+    },15000);
 }
