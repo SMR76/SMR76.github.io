@@ -18,8 +18,11 @@
     max-width:  550px;
     max-height: 550px;
 }
-#contactMe div img  {
+#contactMe div a  {
     position: absolute;
+}
+
+#contactMe div img  {
     filter: grayscale(100%);
     transition: all 0.5s ease;
 }
