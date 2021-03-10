@@ -1,0 +1,67 @@
+.ctooltips 
+.t-tooltiptext,
+.r-tooltiptext,
+.b-tooltiptext,
+.l-tooltiptext {
+    visibility:hidden;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0px;
+    margin: 0px;
+    
+    position: absolute;
+    z-index: 1;
+}
+
+.ctooltips .t-tooltiptext{left: 30%; bottom: 100%;transform: translateX(-50%);}
+.ctooltips .r-tooltiptext{left: 120%;top: 60%;transform: translateY(-50%);}
+.ctooltips .b-tooltiptext{left: 50%; top: 130%;transform: translateX(-50%);}
+.ctooltips .l-tooltiptext{right:120%;top: 50%;transform: translateY(-50%);}
+
+.ctooltips 
+.t-tooltiptext::after,
+.r-tooltiptext::after,
+.b-tooltiptext::after,
+.l-tooltiptext::after {
+    content: " ";
+    border-width: 5px;
+    position: absolute;
+    border-style: solid;
+}
+
+.ctooltips .t-tooltiptext::after {
+    top: 100%;right: 10%;
+    border-color: black transparent transparent transparent;
+}
+.ctooltips .r-tooltiptext::after {
+    top: 50%;right: 100%;margin-top: -5px;
+    border-color: transparent black transparent transparent;
+}
+.ctooltips .b-tooltiptext::after {
+    bottom: 100%;left: 50%;
+    border-color: transparent transparent black transparent;
+}
+.ctooltips .l-tooltiptext::after {
+    top: 50%;left: 100%;margin-top: -5px;
+    border-color: transparent transparent transparent black;
+}
+
+.ctooltips a:hover [class$="tooltiptext"] {
+    visibility: visible;
+    animation:swipShow linear 0.3s forwards;
+}
+
+@keyframes swipShow{
+    0% {
+        opacity:0;
+        width:160px;
+        padding-right:20px;
+    }
+    100% {
+        opacity:1;
+        width:130px;
+        padding-right:0px;
+    }
+}
